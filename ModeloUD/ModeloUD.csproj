@@ -6,9 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\TipoEmpleado\" />
-    <Folder Include="Views\Sede\" />
-  </ItemGroup>
-
 </Project>
