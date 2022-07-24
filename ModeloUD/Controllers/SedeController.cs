@@ -17,7 +17,7 @@ namespace ModeloUD.Controllers
             return View();
         }
 
-
+        [Route("Sede/Agregar")]
         // GET: SedeController1/Create
         public ActionResult Create()
         {
@@ -38,7 +38,7 @@ namespace ModeloUD.Controllers
                 return View();
             }
         }
-
+        [Route("Sede/Editar")]
         // GET: SedeController1/Edit/5
         public ActionResult Edit(int id)
         {

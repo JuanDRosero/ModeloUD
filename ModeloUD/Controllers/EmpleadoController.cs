@@ -20,6 +20,7 @@ namespace ModeloUD.Controllers
 
 
         // GET: EmpleadoController/Create
+        [Route("Empleado/Agregar")]
         public ActionResult Create()
         {
             return View();
@@ -39,7 +40,7 @@ namespace ModeloUD.Controllers
                 return View();
             }
         }
-
+        [Route("Empleado/Editar/{id?}")]
         // GET: EmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {

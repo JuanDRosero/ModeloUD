@@ -10,13 +10,14 @@ namespace ModeloUD.Controllers
         {
             this._logger = logger;
         }
+        [Route("Rol/")]
         // GET: TipoEmpleadoController
         public ActionResult Index()
         {
             return View();
         }
 
-
+        [Route("Rol/Agregar")]
         // GET: TipoEmpleadoController/Create
         public ActionResult Create()
         {
@@ -37,7 +38,7 @@ namespace ModeloUD.Controllers
                 return View();
             }
         }
-
+        [Route("Rol/Editar")]
         // GET: TipoEmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {
