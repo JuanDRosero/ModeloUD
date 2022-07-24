@@ -17,11 +17,7 @@ namespace ModeloUD.Controllers
             return View();
         }
 
-        // GET: EmpleadoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+
 
         // GET: EmpleadoController/Create
         public ActionResult Create()

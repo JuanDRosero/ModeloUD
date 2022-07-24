@@ -14,7 +14,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Modulo UD</a>
+            <a class="navbar-brand ps-3" asp-controller="Home" asp-action="Index">Modulo UD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         </nav>
@@ -24,7 +24,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Inicio</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index" >
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-medal"></i></div>
                                 Modulo Unidad Deportiva
                             </a>
@@ -36,8 +36,8 @@
                             </a>
                             <div class="collapse" id="empleado" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="registrarEmpleado.html">Crear Empleado</a>
-                                    <a class="nav-link" href="listarEmpleados.html">Modificar Empleado</a>
+                                    <a class="nav-link" asp-controller="Empleado" asp-action="Create" >Crear Empleado</a>
+                                    <a class="nav-link" asp-controller="Empleado" asp-action="Index" >Modificar Empleado</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#sedes" aria-expanded="false" aria-controls="collapsePages">
@@ -47,8 +47,8 @@
                             </a>
                             <div class="collapse" id="sedes" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="registrarSede.html">Crear Sede</a>
-                                    <a class="nav-link" href="listarSede.html">Modificar Sedes</a>
+                                    <a class="nav-link" asp-controller="Sede" asp-action="Create" >Crear Sede</a>
+                                    <a class="nav-link" asp-controller="Sede" asp-action="Index" >Modificar Sedes</a>
                                 </nav>
                             </div>
 
@@ -59,8 +59,8 @@
                             </a>
                             <div class="collapse" id="manejo" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="registrarRol.html">Crear cargo del empleado</a>
-                                    <a class="nav-link" href="listarRol.html">Modificar cargo del empleado</a>
+                                    <a class="nav-link" asp-controller="TipoEmpleado" asp-action="Create" >Crear cargo del empleado</a>
+                                    <a class="nav-link" asp-controller="TipoEmpleado" asp-action="Index" >Modificar cargo del empleado</a>
                                 </nav>
                             </div>
                         </div>

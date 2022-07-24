@@ -16,11 +16,6 @@ namespace ModeloUD.Controllers
             return View();
         }
 
-        // GET: TipoEmpleadoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: TipoEmpleadoController/Create
         public ActionResult Create()

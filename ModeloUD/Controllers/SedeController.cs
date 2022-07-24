@@ -17,11 +17,6 @@ namespace ModeloUD.Controllers
             return View();
         }
 
-        // GET: SedeController1/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: SedeController1/Create
         public ActionResult Create()
