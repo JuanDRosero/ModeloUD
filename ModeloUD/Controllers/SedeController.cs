@@ -19,7 +19,7 @@ namespace ModeloUD.Controllers
         public ActionResult Index()
         {
             var lista=_sedeService.GetSedes();
-            return View();
+            return View(lista);
         }
 
         [Route("Sede/Agregar")]
@@ -28,7 +28,7 @@ namespace ModeloUD.Controllers
         {
             return View();
         }
-
+        [Route("Sede/Agregar")]
         // POST: SedeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -36,7 +36,7 @@ namespace ModeloUD.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View();
+                return View(sede);
             }
             _sedeService.AddSede(sede);
             return RedirectToAction("Index");
@@ -46,9 +46,10 @@ namespace ModeloUD.Controllers
         public ActionResult Edit(int id)
         {
             var sede = _sedeService.GetSede(id);
-            return View();
+            return View(sede);
         }
 
+        [Route("Sede/Editar")]
         // POST: SedeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,7 +57,7 @@ namespace ModeloUD.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(sede);
             }
             var res=_sedeService.UpdateSede(sede);
             return RedirectToAction("Index");

@@ -38,7 +38,7 @@ namespace ModeloUD.Controllers
 
             return View(model);
         }
-
+        [Route("Empleado/Agregar")]
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,7 +62,7 @@ namespace ModeloUD.Controllers
             model.listaRoles = getListaRoles();
             return View(model);
         }
-
+        [Route("Empleado/Editar/{id?}")]
         // POST: EmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]

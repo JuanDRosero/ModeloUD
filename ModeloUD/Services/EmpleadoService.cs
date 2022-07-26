@@ -1,5 +1,6 @@
 ﻿using ModeloUD.Interfaces;
 using ModeloUD.Models;
+using Oracle.ManagedDataAccess.Client;
 
 namespace ModeloUD.Services
 {
@@ -13,27 +14,47 @@ namespace ModeloUD.Services
 
         public void AddEmpleado(Empleado empleado)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(_conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
         }
 
         public bool DeleteEmpleado(int id)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(_conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return true;
         }
 
         public Empleado GetEmpleado(int id)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(_conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return new Empleado();
         }
 
         public IEnumerable<Empleado> GetEmpleados()
         {
-            throw new NotImplementedException();
+            List<Empleado> empleados = new List<Empleado>();
+            using (OracleConnection con = new OracleConnection(_conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return empleados;
         }
 
         public bool UpdateEmpleado(Empleado empleado)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(_conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return true;
         }
     }
 }

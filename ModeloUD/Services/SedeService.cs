@@ -1,5 +1,6 @@
 ﻿using ModeloUD.Interfaces;
 using ModeloUD.Models;
+using Oracle.ManagedDataAccess.Client;
 
 namespace ModeloUD.Services
 {
@@ -14,27 +15,47 @@ namespace ModeloUD.Services
 
         public void AddSede(Sede sede)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
         }
 
         public bool DeleteSede(int id)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return true;
         }
 
         public Sede GetSede(int id)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return new Sede();
         }
 
         public IEnumerable<Sede> GetSedes()
         {
-            throw new NotImplementedException();
+            List<Sede> sedes = new List<Sede>();
+            using (OracleConnection con = new OracleConnection(conexionString))
+            {
+            //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return sedes;
         }
 
         public bool UpdateSede(Sede sede)
         {
-            throw new NotImplementedException();
+            using (OracleConnection con = new OracleConnection(conexionString))
+            {
+                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+            }
+            return true;
         }
     }
 }

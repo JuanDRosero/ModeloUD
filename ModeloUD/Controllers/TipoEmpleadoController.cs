@@ -28,7 +28,7 @@ namespace ModeloUD.Controllers
         {
             return View();
         }
-
+        [Route("Rol/Agregar")]
         // POST: TipoEmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,7 +48,7 @@ namespace ModeloUD.Controllers
             var rol = _rolService.GetRol(id);
             return View(rol);
         }
-
+        [Route("Rol/Editar")]
         // POST: TipoEmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -61,7 +61,7 @@ namespace ModeloUD.Controllers
             var res = _rolService.UpdateRol(rol);
             return RedirectToAction("Index");
         }
-
+        [Route("Rol/Eliminar")]
         // GET: TipoEmpleadoController/Delete/5
         public ActionResult Delete(int id)
         {
