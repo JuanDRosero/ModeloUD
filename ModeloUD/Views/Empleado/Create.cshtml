@@ -42,36 +42,45 @@
                                 <div class="form-floating mb-3">
 
                                     <select asp-for="Empleado.Rol" asp-items="Model.listaRoles">
-
+                                        <option disabled selected>Selecciona una opcion</option>
+                                        <option value="Administrador">123</option>
+                                        <option value="Director">456</option>
+                                        <option value="Fisioterapeuta">789</option>
+                                        <option value="Entrenador">111</option>
+                                        <option value="Auxiliar">222</option>
+                                        <option value="Docente">333</option>
                                     </select>
                                     <span asp-validation-for="Empleado.Rol" class="text-danger"></span>
-                                    <!--
-                                    <select class="form-control" id="inputRol">
+                                    
+                                    <!-- select class="form-control" id="inputRol">
                                         <option disabled selected>Selecciona una opcion</option>
-                                        <option value="Administrador">Administrador Deportivo</option>
-                                        <option value="Director">Director Deportivo</option>
-                                        <option value="Fisioterapeuta">Fisioterapeuta</option>
-                                        <option value="Entrenador">Entrenador Deportivo</option>
-                                        <option value="Auxiliar">Auxiliar Deportivo</option>
-                                        <option value="Docente">Docente</option>
-                                    </select>
-                                    -->
+                                        <option value="Administrador">123</option>
+                                        <option value="Director">456</option>
+                                        <option value="Fisioterapeuta">789</option>
+                                        <option value="Entrenador">111</option>
+                                        <option value="Auxiliar">222</option>
+                                        <option value="Docente">333</option>
+                                    </!--select -->
+                                    
                                 </div>
                                 <div class="form-floating mb-3">
                                     <select asp-for="Empleado.Sede" asp-items="Model.listaSedes">
-
+                                        <option disabled selected>Selecciona una sede</option>
+                                        <option value="Administrador">222</option>
+                                        <option value="Director">111</option>
+                                        <option value="Fisioterapeuta">789</option>
+                                        <option value="Entrenador">456</option>
+                                        <option value="Auxiliar">123</option>
                                     </select>
-                                    <span asp-validation-for="Empleado.Sede" class="text-danger"></span>
-                                    <!--
+                                    <!-- span asp-validation-for="Empleado.Sede" class="text-danger"></!--span>
                                     <select class="form-control" id="inputRol">
                                         <option disabled selected>Selecciona una sede</option>
-                                        <option value="Administrador">La 40</option>
-                                        <option value="Director">La maca</option>
-                                        <option value="Fisioterapeuta">La tecno</option>
-                                        <option value="Entrenador">Bosa</option>
-                                        <option value="Auxiliar">La ASAB</option>
-                                    </select>
-                                    -->
+                                        <option value="Administrador">222</option>
+                                        <option value="Director">111</option>
+                                        <option value="Fisioterapeuta">789</option>
+                                        <option value="Entrenador">456</option>
+                                        <option value="Auxiliar">123</option>
+                                    </select -->
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid"><button class="btn btn-primary btn-block" action="submit">Crear Empleado</button></div>

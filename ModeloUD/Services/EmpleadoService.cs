@@ -16,7 +16,14 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.CommandText = "Insert into yeserranon.empleado(IDEMPLEADO, IDCURSO, IDTIPO, IDSEDE, NUMEROIDENTIDAD, " +
+                        "NOMBREEMPLEADO, APELLIDOEMPLEADO)Values("+empleado.Id+"','"+"'123'"+empleado.Rol+"','"+empleado.Sede
+                        +"','"+empleado.Codigo+"','"+empleado.Nombre+"','"+empleado.Apellido+"')'";
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
         }
 
@@ -33,7 +40,26 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from empleado;";
+                    OracleDataReader oracleDataReader = oracleCommand.ExecuteReader();
+                    while (oracleDataReader.Read())
+                    {
+                        Empleado empleado = new Empleado
+                        {
+                            Id = oracleDataReader["idEmpleado"].ToString(),
+                            Codigo = Convert.ToInt32(oracleDataReader["numeroEmpleado"]),
+                            Nombre = oracleDataReader["nombre"].ToString(),
+                            Apellido = oracleDataReader["apellido"].ToString(),
+                            Rol = oracleDataReader["rol"].ToString(),
+                            Sede = oracleDataReader["sede"].ToString()
+                            
+                        };
+                    }
+                }
             }
             return new Empleado();
         }

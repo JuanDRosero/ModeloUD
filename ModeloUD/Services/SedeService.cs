@@ -17,7 +17,12 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.CommandText = "INSERT INTO SEDE (IDSEDE, NOMBRESEDE) VALUES ('"+sede.Id+"','"+sede.Nombre+"');";
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
         }
 
