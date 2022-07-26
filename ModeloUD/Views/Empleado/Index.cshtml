@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EmpleadosViewModel
+@{
     ViewData["Title"] = "Empleado";
 }
 <div class="card mb-4">
@@ -20,54 +21,29 @@
                 </tr>
             </thead>
             <tbody align="center">
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <a  asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-user-xmark"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-user-xmark"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-user-xmark"></i>
-                        </a>
-                    </td>
-                </tr>
+               @if (Model.Empleados.Count()!=0)
+                {
+                    foreach (var item in Model.Empleados)
+                    {
+                     <tr>
+                        <td>@Html.DisplayFor(x=>item.Id)</td>
+                        <td>@Html.DisplayFor(x=>item.Nombre)</td>
+                        <td>@Html.DisplayFor(x=>item.Apellido)</td>
+                        <td>@Html.DisplayFor(x=>item.Codigo)</td>
+                        <td>@Html.DisplayFor(x=>Model.listaRoles.Where(x=>x.Id==item.Rol).First().Descripcion)</td>
+                        <td>@Html.DisplayFor(x=>Model.listaSedes.Where(x=>x.Id==item.Rol).First().Nombre)</td>
+                        <td>
+                            <a  asp-action="Edit" class="btn" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="btn" asp-action="Delete" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-user-xmark"></i>
+                            </a>
+                        </td>
+                    </tr>
+ 
+                    }
+                }
             </tbody>
         </table>
     </div>

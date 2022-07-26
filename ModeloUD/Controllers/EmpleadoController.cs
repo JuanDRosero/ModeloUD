@@ -21,8 +21,11 @@ namespace ModeloUD.Controllers
         // GET: EmpleadoController
         public ActionResult Index()
         {
-            var lista= _empleadoService.GetEmpleados(); //Retorna todos los empleados
-            return View(lista);
+            EmpleadosViewModel model = new EmpleadosViewModel();
+            model.Empleados= _empleadoService.GetEmpleados(); //Retorna todos los empleados
+            model.listaSedes = _sedeService.GetSedes();
+            model.listaRoles = _rolService.GetRoles();
+            return View(model);
         }
 
         // GET: EmpleadoController/Create
@@ -83,12 +86,23 @@ namespace ModeloUD.Controllers
 
         private SelectList getListaSedes()
         {
-            return new SelectList(_sedeService.GetSedes().Select(x => x.Nombre)); ;
+            var l = new List<SelectListItem>();
+            foreach (var item in _sedeService.GetSedes())
+            {
+                l.Add(new SelectListItem { Value = item.Id, Text = item.Nombre });
+            }
+           
+            return new SelectList(l); ;
         }
 
         private SelectList getListaRoles()
         {
-            return new SelectList(_rolService.GetRoles().Select(x => x.Descripcion)); ;
+            var l = new List<SelectListItem>();
+            foreach (var item in _rolService.GetRoles())
+            {
+                l.Add(new SelectListItem { Value = item.Id, Text = item.Descripcion });
+            }
+            return new SelectList(l); ;
         }
     }
 }
