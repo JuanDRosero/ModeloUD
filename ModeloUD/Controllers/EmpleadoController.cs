@@ -38,17 +38,18 @@ namespace ModeloUD.Controllers
 
             return View(model);
         }
+
         [Route("Empleado/Agregar")]
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EmpleadoViewModel empleado )
+        public ActionResult Create(EmpleadoViewModel emp )
         {
             if (!ModelState.IsValid)
             {
-                return View(empleado);
+                return View(emp);
             }
-             _empleadoService.AddEmpleado(empleado.Empleado);
+             _empleadoService.AddEmpleado(emp.Empleado);
             return RedirectToAction("Index");
 
         }
