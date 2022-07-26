@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModeloUD.Interfaces;
 using ModeloUD.Models;
 
 namespace ModeloUD.Controllers
@@ -7,9 +8,9 @@ namespace ModeloUD.Controllers
     public class SedeController : Controller
     {
         private readonly ILogger<SedeController> _logger;
-        private readonly IServiceSede _sedeService;
+        private readonly ISedeService _sedeService;
 
-        public SedeController(ILogger<SedeController> logger, IServiceSede sedeService)
+        public SedeController(ILogger<SedeController> logger, ISedeService sedeService)
         {
             this._logger = logger;
             this._sedeService = sedeService;
@@ -57,7 +58,7 @@ namespace ModeloUD.Controllers
             {
                 return View();
             }
-            var res=_sedeService.EditSede(sede);
+            var res=_sedeService.UpdateSede(sede);
             return RedirectToAction("Index");
 
         }

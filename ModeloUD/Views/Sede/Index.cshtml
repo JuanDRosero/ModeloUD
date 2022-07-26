@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Sede>
+
+@{
     ViewData["Title"] = "Sedes";
 }
 <div class="card mb-4">
@@ -10,49 +12,31 @@
         <table class="table">
             <thead align="center">
                 <tr>
-                    <th>Identificador</th>
-                    <th>Nombre de la sede</th>
+                    <th>@Html.DisplayNameFor(model=>model.Id)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Nombre)</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody align="center">
+            @if (Model.Count()!=0)
+            {
+                foreach (var item in Model)
+                {
                 <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
+                    <td>@Html.DisplayFor(x=>item.Id)</td>
+                    <td>@Html.DisplayFor(x=>item.Nombre)</td>
                     <td>
-                        <a asp-action="Edit" class="btn">
+                        <a asp-action="Edit" class="btn" asp-route-id="@item.Id">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <a class="btn">
+                        <a class="btn" asp-action="Delete" asp-route-id="@item.Id">
                             <i class="fa-solid fa-building-circle-xmark"></i>
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-building-circle-xmark"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a type="button" class="btn">
-                            <i class="fa-solid fa-building-circle-xmark"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
+                }
+            }
+             </tbody>
         </table>
     </div>
 </div>

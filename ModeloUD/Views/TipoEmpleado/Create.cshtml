@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Rol
 @{
     ViewData["Title"] = "Agregar Empleo";
 }
@@ -12,17 +10,20 @@
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Crear Cargo</h3></div>
                         <div class="card-body">
-                            <form>
+                            <form method="post" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="inputIdentificador" type="text" placeholder="123" min="0" max="999" maxlength="3" />
-                                    <label for="inputIdentificador">Identificador del Cargo</label>
+                                    <input class="form-control" id="inputIdentificador" asp-for="Id" maxlength="3" />
+                                    <label asp-for="Id">Identificador del Cargo</label>
+                                    <span asp-validation-for="Id" class="text-danger"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="inputCargo" type="text" placeholder="Nombre del cargo" />
-                                    <label for="inputCargo">Nombre del Cargo</label>
+                                    <input class="form-control" id="inputCargo" asp-for="Descripcion" placeholder="Nombre del cargo" />
+                                    <label asp-for="Descripcion">Nombre del Cargo</label>
+                                    <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                                 <div class="mt-4 mb-0">
-                                    <div class="d-grid"><a class="btn btn-primary btn-block" href="#">Crear Cargo</a></div>
+                                    <div class="d-grid"><button class="btn btn-primary btn-block" action="submit">Crear Cargo</button></div>
                                 </div>
                             </form>
                         </div>
