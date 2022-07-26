@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModeloUD.Models;
 
 namespace ModeloUD.Controllers
 {
     public class SedeController : Controller
     {
         private readonly ILogger<SedeController> _logger;
+        private readonly IServiceSede _sedeService;
 
-        public SedeController(ILogger<SedeController> logger)
+        public SedeController(ILogger<SedeController> logger, IServiceSede sedeService)
         {
             this._logger = logger;
+            this._sedeService = sedeService;
         }
         // GET: SedeController1
         public ActionResult Index()
         {
+            var lista=_sedeService.GetSedes();
             return View();
         }
 
@@ -27,58 +31,44 @@ namespace ModeloUD.Controllers
         // POST: SedeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Sede sede)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if(!ModelState.IsValid)
             {
                 return View();
             }
+            _sedeService.AddSede(sede);
+            return RedirectToAction("Index");
         }
         [Route("Sede/Editar")]
         // GET: SedeController1/Edit/5
         public ActionResult Edit(int id)
         {
+            var sede = _sedeService.GetSede(id);
             return View();
         }
 
         // POST: SedeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Sede sede)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+            var res=_sedeService.EditSede(sede);
+            return RedirectToAction("Index");
+
         }
 
         // GET: SedeController1/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var res = _sedeService.DeleteSede(id);
+            return RedirectToAction("Index");
         }
 
-        // POST: SedeController1/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

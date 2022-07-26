@@ -1,7 +1,17 @@
+using ModeloUD.Interfaces;
+using ModeloUD.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//Injección de Dependencias de Servicios
+builder.Services.AddTransient<IEmpleadoService, EmpleadoService>();
+builder.Services.AddTransient<IRolService, RolService>();
+builder.Services.AddTransient<ISedeService, SedeService>();
+
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

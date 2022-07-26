@@ -1,20 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModeloUD.Interfaces;
+using ModeloUD.Models;
 
 namespace ModeloUD.Controllers
 {
     public class TipoEmpleadoController : Controller
     {
         private readonly ILogger<SedeController> _logger;
-        public TipoEmpleadoController(ILogger<SedeController> logger)
+        private readonly IRolService _rolService;
+        public TipoEmpleadoController(ILogger<SedeController> logger, IRolService rolService)
         {
             this._logger = logger;
+            this._rolService = rolService;
         }
         [Route("Rol/")]
         // GET: TipoEmpleadoController
         public ActionResult Index()
         {
-            return View();
+            var lista = _rolService.GetRoles();
+            return View(lista);
         }
 
         [Route("Rol/Agregar")]
@@ -27,58 +32,43 @@ namespace ModeloUD.Controllers
         // POST: TipoEmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Rol rol)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+            _rolService.AddRol(rol);
+            return RedirectToAction("Index");
         }
         [Route("Rol/Editar")]
         // GET: TipoEmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var rol = _rolService.GetRol(id);
+            return View(rol);
         }
 
         // POST: TipoEmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Rol rol)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(rol);
             }
-            catch
-            {
-                return View();
-            }
+            var res = _rolService.UpdateRol(rol);
+            return RedirectToAction("Index");
         }
 
         // GET: TipoEmpleadoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var res = _rolService.DeleteRol(id);
+            return RedirectToAction("Index");
         }
 
-        // POST: TipoEmpleadoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

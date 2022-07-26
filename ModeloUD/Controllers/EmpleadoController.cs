@@ -1,86 +1,94 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ModeloUD.Interfaces;
+using ModeloUD.Models;
 
 namespace ModeloUD.Controllers
 {
     public class EmpleadoController : Controller
     {
-        private readonly ILogger<EmpleadoController> _logger;
-
-        public EmpleadoController(ILogger<EmpleadoController> logger)
+        private readonly IEmpleadoService _empleadoService;
+        private readonly ISedeService _sedeService;
+        private readonly IRolService _rolService;
+        public EmpleadoController(IEmpleadoService empleadoService, ISedeService sedeService, IRolService rolService)
         {
-            _logger = logger;
+            this._empleadoService = empleadoService;
+            this._sedeService = sedeService;
+            this._rolService = rolService;
         }
+
         // GET: EmpleadoController
         public ActionResult Index()
         {
-            return View();
+            var lista= _empleadoService.GetEmpleados(); //Retorna todos los empleados
+            return View(lista);
         }
-
-
 
         // GET: EmpleadoController/Create
         [Route("Empleado/Agregar")]
         public ActionResult Create()
         {
-            return View();
+            EmpleadoViewModel model = new EmpleadoViewModel();
+            model.listaSedes = getListaSedes();
+            model.listaRoles = getListaRoles();
+
+            return View(model);
         }
 
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(EmpleadoViewModel empleado )
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(empleado);
             }
-            catch
-            {
-                return View();
-            }
+             _empleadoService.AddEmpleado(empleado.Empleado);
+            return RedirectToAction("Index");
+
         }
         [Route("Empleado/Editar/{id?}")]
         // GET: EmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            EmpleadoViewModel model = new EmpleadoViewModel();
+            model.Empleado = _empleadoService.GetEmpleado(id);
+            model.listaSedes = getListaSedes();
+            model.listaRoles = getListaRoles();
+            return View(model);
         }
 
         // POST: EmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EmpleadoViewModel empleado)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(empleado);
             }
-            catch
-            {
-                return View();
-            }
+            var Resultado = _empleadoService.UpdateEmpleado(empleado.Empleado);
+            return RedirectToAction("Index");
+
         }
 
         // GET: EmpleadoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var resultado= _empleadoService.DeleteEmpleado(id);
+            return RedirectToAction("Index");
         }
 
-        // POST: EmpleadoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        private SelectList getListaSedes()
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return new SelectList(_sedeService.GetSedes().Select(x => x.Nombre)); ;
+        }
+
+        private SelectList getListaRoles()
+        {
+            return new SelectList(_rolService.GetRoles().Select(x => x.Descripcion)); ;
         }
     }
 }
