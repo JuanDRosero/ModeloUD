@@ -73,6 +73,8 @@ namespace ModeloUD.Controllers
         {
             if (!ModelState.IsValid)
             {
+                empleado.listaSedes = getListaSedes();
+                empleado.listaRoles = getListaRoles();
                 return View(empleado);
             }
             var Resultado = _empleadoService.UpdateEmpleado(empleado.emp);

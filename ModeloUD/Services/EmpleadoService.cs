@@ -21,7 +21,7 @@ namespace ModeloUD.Services
                     con.Open();
                     oracleCommand.Connection = con;
                     oracleCommand.CommandText = "insert into empleado(idempleado, idcurso, idtipo, idsede, numeroidentidad, nombreempleado,apellidoempleado)" +
-                        "values('"+empleado.Id+"','123',"+empleado.Rol+"','"+empleado.Sede+"','"+empleado.Codigo+"','"+empleado.Nombre+"','"+empleado.Apellido+"')";
+                        "values('"+empleado.Id+"','123','"+empleado.Rol+"','"+empleado.Sede+"','"+empleado.Codigo+"','"+empleado.Nombre+"','"+empleado.Apellido+"')";
                     oracleCommand.CommandType = System.Data.CommandType.Text;
                     oracleCommand.ExecuteNonQuery();
                 }
@@ -54,7 +54,7 @@ namespace ModeloUD.Services
                     con.Open();
                     oracleCommand.Connection = con;
                     oracleCommand.BindByName = true;
-                    oracleCommand.CommandText = "select * from empleado where idtipo='" + id + "'";
+                    oracleCommand.CommandText = "select * from empleado where idempleado='" + id + "'";
                     OracleDataReader dataReader = oracleCommand.ExecuteReader();
                     while (dataReader.Read())
                     {
@@ -105,11 +105,13 @@ namespace ModeloUD.Services
             {
                 using (OracleCommand oracleCommand = new OracleCommand())
                 {
-                    /*con.Open();
+                    con.Open();
                     oracleCommand.Connection = con;
-                    oracleCommand.CommandText = "update empleado set desctipo='" + empleado.Descripcion + "'" + " where idtipo='" + empleado.Id + "'";
+                    oracleCommand.CommandText = "update empleado set idtipo='" + empleado.Rol+ "', idsede='"+ empleado.Sede +"',"+ 
+                        " numeroidentidad='"+empleado.Codigo +"', nombreempleado='"+empleado.Nombre +"', " +
+                        "apellidoempleado='"+empleado.Apellido+ "' where idempleado='"+empleado.Id+"'";
                     oracleCommand.CommandType = System.Data.CommandType.Text;
-                    oracleCommand.ExecuteNonQuery();*/
+                    oracleCommand.ExecuteNonQuery();
                 }
             }
             return true;
