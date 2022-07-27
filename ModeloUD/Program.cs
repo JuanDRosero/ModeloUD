@@ -4,7 +4,7 @@ using ModeloUD.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+var cadena = builder.Configuration.GetConnectionString("OracleDBConnection");
 //Injección de Dependencias de Servicios
 builder.Services.AddTransient<IEmpleadoService, EmpleadoService>();
 builder.Services.AddTransient<IRolService, RolService>();
