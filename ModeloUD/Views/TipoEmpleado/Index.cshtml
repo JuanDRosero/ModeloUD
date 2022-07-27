@@ -21,42 +21,18 @@
                 {
                     foreach (var item in Model)
                     {
-                        <tr>
-                    <td>@Html.DisplayFor(x=>item.Id)</td>
-                    <td>@Html.DisplayFor(x=>item.Descripcion)></td>
-                    <td>
-                        <a asp-action="Edit" class="btn" asp-route-id="@item.Id">
-                            <i class="fa-solid fa-file-pen"></i>
-                        </a>
-                        <a asp-action="Delete"class="btn"asp-route-id="@item.Id">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-file-pen"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Tiger Nixon</td>
-                    <td>
-                        <a asp-action="Edit" class="btn">
-                            <i class="fa-solid fa-file-pen"></i>
-                        </a>
-                        <a class="btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
+                     <tr>
+                        <td>@Html.DisplayFor(x=>item.Id)</td>
+                        <td>@Html.DisplayFor(x=>item.Descripcion)</td>
+                        <td>
+                            <a asp-action="Edit" class="btn" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-file-pen"></i>
+                            </a>
+                            <a asp-action="Delete"class="btn"asp-route-id="@item.Id">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 }
             </tbody>

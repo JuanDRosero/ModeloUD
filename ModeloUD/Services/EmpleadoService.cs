@@ -19,9 +19,10 @@ namespace ModeloUD.Services
                 using (OracleCommand oracleCommand = new OracleCommand())
                 {
                     con.Open();
-                    oracleCommand.CommandText = "Insert into yeserranon.empleado(IDEMPLEADO, IDCURSO, IDTIPO, IDSEDE, NUMEROIDENTIDAD, " +
-                        "NOMBREEMPLEADO, APELLIDOEMPLEADO)Values("+empleado.Id+"','"+"'123'"+empleado.Rol+"','"+empleado.Sede
-                        +"','"+empleado.Codigo+"','"+empleado.Nombre+"','"+empleado.Apellido+"')'";
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "insert into empleado(idempleado, idcurso, idtipo, idsede, numeroidentidad, nombreempleado,apellidoempleado)" +
+                        "values('"+empleado.Id+"','123',"+empleado.Rol+"','"+empleado.Sede+"','"+empleado.Codigo+"','"+empleado.Nombre+"','"+empleado.Apellido+"')";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
                     oracleCommand.ExecuteNonQuery();
                 }
             }
@@ -31,37 +32,42 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "delete from empleado where idempleado=" + id;
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
             return true;
         }
 
         public Empleado GetEmpleado(int id)
         {
+            Empleado empleado = new Empleado();
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
                 using (OracleCommand oracleCommand = new OracleCommand())
                 {
                     con.Open();
+                    oracleCommand.Connection = con;
                     oracleCommand.BindByName = true;
-                    oracleCommand.CommandText = "select * from empleado;";
-                    OracleDataReader oracleDataReader = oracleCommand.ExecuteReader();
-                    while (oracleDataReader.Read())
+                    oracleCommand.CommandText = "select * from empleado where idtipo='" + id + "'";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
                     {
-                        Empleado empleado = new Empleado
-                        {
-                            Id = oracleDataReader["idEmpleado"].ToString(),
-                            Codigo = Convert.ToInt32(oracleDataReader["numeroEmpleado"]),
-                            Nombre = oracleDataReader["nombre"].ToString(),
-                            Apellido = oracleDataReader["apellido"].ToString(),
-                            Rol = oracleDataReader["rol"].ToString(),
-                            Sede = oracleDataReader["sede"].ToString()
-                            
-                        };
+                        empleado.Id = dataReader["idempleado"].ToString();
+                        empleado.Rol = dataReader["idtipo"].ToString();
+                        empleado.Sede = dataReader["idsede"].ToString();
+                        empleado.Codigo = Convert.ToInt32(dataReader["numeroidentidad"]);
+                        empleado.Nombre = dataReader["nombreempleado"].ToString();
+                        empleado.Apellido = dataReader["apellidoempleado"].ToString();
                     }
                 }
             }
-            return new Empleado();
+            return empleado;
         }
 
         public IEnumerable<Empleado> GetEmpleados()
@@ -69,7 +75,26 @@ namespace ModeloUD.Services
             List<Empleado> empleados = new List<Empleado>();
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from empleado";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        empleados.Add(new Empleado
+                        {
+                            Id = dataReader["idempleado"].ToString(),
+                            Rol = dataReader["idtipo"].ToString(),
+                            Sede = dataReader["idsede"].ToString(),
+                            Codigo = Convert.ToInt32(dataReader["numeroidentidad"]),
+                            Nombre = dataReader["nombreempleado"].ToString(),
+                            Apellido = dataReader["apellidoempleado"].ToString()
+                        });
+                    }
+                }
             }
             return empleados;
         }
@@ -78,7 +103,14 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(_conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    /*con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "update empleado set desctipo='" + empleado.Descripcion + "'" + " where idtipo='" + empleado.Id + "'";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();*/
+                }
             }
             return true;
         }

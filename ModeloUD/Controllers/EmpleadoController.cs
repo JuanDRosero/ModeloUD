@@ -43,13 +43,15 @@ namespace ModeloUD.Controllers
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EmpleadoViewModel emp )
+        public ActionResult Create(EmpleadoViewModel models )
         {
             if (!ModelState.IsValid)
             {
-                return View(emp);
+                models.listaSedes = getListaSedes();
+                models.listaRoles = getListaRoles();
+                return View(models);
             }
-             _empleadoService.AddEmpleado(emp.Empleado);
+             _empleadoService.AddEmpleado(models.emp);
             return RedirectToAction("Index");
 
         }
@@ -58,7 +60,7 @@ namespace ModeloUD.Controllers
         public ActionResult Edit(int id)
         {
             EmpleadoViewModel model = new EmpleadoViewModel();
-            model.Empleado = _empleadoService.GetEmpleado(id);
+            model.emp = _empleadoService.GetEmpleado(id);
             model.listaSedes = getListaSedes();
             model.listaRoles = getListaRoles();
             return View(model);
@@ -73,7 +75,7 @@ namespace ModeloUD.Controllers
             {
                 return View(empleado);
             }
-            var Resultado = _empleadoService.UpdateEmpleado(empleado.Empleado);
+            var Resultado = _empleadoService.UpdateEmpleado(empleado.emp);
             return RedirectToAction("Index");
 
         }
@@ -85,7 +87,7 @@ namespace ModeloUD.Controllers
             return RedirectToAction("Index");
         }
 
-        private SelectList getListaSedes()
+        private List<SelectListItem> getListaSedes()
         {
             var l = new List<SelectListItem>();
             foreach (var item in _sedeService.GetSedes())
@@ -93,17 +95,17 @@ namespace ModeloUD.Controllers
                 l.Add(new SelectListItem { Value = item.Id, Text = item.Nombre });
             }
            
-            return new SelectList(l); ;
+            return l;
         }
 
-        private SelectList getListaRoles()
+        private List<SelectListItem> getListaRoles()
         {
             var l = new List<SelectListItem>();
             foreach (var item in _rolService.GetRoles())
             {
                 l.Add(new SelectListItem { Value = item.Id, Text = item.Descripcion });
             }
-            return new SelectList(l); ;
+            return l;
         }
     }
 }

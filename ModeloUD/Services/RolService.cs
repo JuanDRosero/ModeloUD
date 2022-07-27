@@ -15,7 +15,14 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "INSERT INTO tipoempleado (idtipo, desctipo) VALUES ('" + empleado.Id + "','" + empleado.Descripcion + "')";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
         }
 
@@ -23,18 +30,38 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "delete from tipoempleado where idtipo=" + id;
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
             return true;
         }
 
         public Rol GetRol(int id)
         {
+            Rol rol = new Rol();
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from tipoempleado where idtipo='" + id + "'";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        rol.Id = dataReader["idtipo"].ToString();
+                        rol.Descripcion = dataReader["desctipo"].ToString();
+                    }
+                }
             }
-            return new Rol();
+            return rol;
         }
 
         public IEnumerable<Rol> GetRoles()
@@ -42,7 +69,22 @@ namespace ModeloUD.Services
             List<Rol> roles = new List<Rol>();
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from tipoempleado";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        roles.Add(new Rol
+                        {
+                            Id = dataReader["idtipo"].ToString(),
+                            Descripcion = dataReader["desctipo"].ToString(),
+                        });
+                    }
+                }
             }
             return roles;
         }
@@ -51,7 +93,14 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "update tipoempleado set desctipo='" + empleado.Descripcion + "'" + " where idtipo='" + empleado.Id + "'";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
             return true;
         }

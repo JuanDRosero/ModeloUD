@@ -4,8 +4,8 @@ namespace ModeloUD.Models
 {
     public class EmpleadoViewModel
     {
-        public Empleado Empleado { get; set; }
-        public SelectList listaSedes { get; set; }
-        public SelectList listaRoles { get; set; }
+        public Empleado emp { get; set; }
+        public List<SelectListItem> listaSedes { get; set; } = null;
+        public List<SelectListItem> listaRoles { get; set; } = null;
     }
 }

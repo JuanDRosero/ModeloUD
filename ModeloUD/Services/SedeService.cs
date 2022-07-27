@@ -20,7 +20,9 @@ namespace ModeloUD.Services
                 using (OracleCommand oracleCommand = new OracleCommand())
                 {
                     con.Open();
-                    oracleCommand.CommandText = "INSERT INTO SEDE (IDSEDE, NOMBRESEDE) VALUES ('"+sede.Id+"','"+sede.Nombre+"');";
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "INSERT INTO SEDE (IDSEDE, NOMBRESEDE) VALUES ('"+sede.Id+"','"+sede.Nombre+"')";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
                     oracleCommand.ExecuteNonQuery();
                 }
             }
@@ -30,18 +32,38 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "delete from sede where idsede="+id;
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
             return true;
         }
 
         public Sede GetSede(int id)
         {
+            Sede sede = new Sede();
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from sede where idsede='"+id+"'";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        sede.Id = dataReader["idsede"].ToString();
+                        sede.Nombre = dataReader["nombresede"].ToString();   
+                    }
+                }
             }
-            return new Sede();
+            return sede;
         }
 
         public IEnumerable<Sede> GetSedes()
@@ -49,7 +71,22 @@ namespace ModeloUD.Services
             List<Sede> sedes = new List<Sede>();
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-            //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.BindByName = true;
+                    oracleCommand.CommandText = "select * from sede";
+                    OracleDataReader dataReader = oracleCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        sedes.Add(new Sede
+                        {
+                            Id = dataReader["idsede"].ToString(),
+                            Nombre = dataReader["nombresede"].ToString(),
+                        });
+                    }
+                }
             }
             return sedes;
         }
@@ -58,7 +95,14 @@ namespace ModeloUD.Services
         {
             using (OracleConnection con = new OracleConnection(conexionString))
             {
-                //https://www.youtube.com/watch?v=Gix8F1FUGeo min 250
+                using (OracleCommand oracleCommand = new OracleCommand())
+                {
+                    con.Open();
+                    oracleCommand.Connection = con;
+                    oracleCommand.CommandText = "update sede set nombresede='"+sede.Nombre+"'"+" where idsede='"+sede.Id+"'";
+                    oracleCommand.CommandType = System.Data.CommandType.Text;
+                    oracleCommand.ExecuteNonQuery();
+                }
             }
             return true;
         }
