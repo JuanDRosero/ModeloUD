@@ -30,8 +30,8 @@
                         <td>@Html.DisplayFor(x=>item.Nombre)</td>
                         <td>@Html.DisplayFor(x=>item.Apellido)</td>
                         <td>@Html.DisplayFor(x=>item.Codigo)</td>
-                        <td>@Html.DisplayFor(x=>Model.listaRoles.Where(x=>x.Id==item.Sede).First().Descripcion)</td>
-                        <td>@Html.DisplayFor(x=>Model.listaSedes.Where(x=>x.Id==item.Rol).First().Nombre)</td>
+                        <td>@Html.DisplayFor(x=>Model.listaSedes.Where(x=>x.Id==item.Sede).First().Nombre)</td>
+                        <td>@Html.DisplayFor(x=>Model.listaRoles.Where(x=>x.Id==item.Rol).First().Descripcion)</td>
 
                         
                         <td>
