@@ -6,7 +6,7 @@
     <form method="post" asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating mb-3">
-                <input class="form-control" id="inputPK" asp-for="emp.Id" placeholder="123" />
+                <input hidden class="form-control" id="inputPK" asp-for="emp.Id" placeholder="123" />
                 <label asp-for="emp.Id"></label>
                 <span asp-validation-for="emp.Id" class="text-danger"></span>
             </div>
